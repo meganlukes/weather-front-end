@@ -1,5 +1,11 @@
 :root {
   font: 16px / 1 sans-serif;
+  background: linear-gradient(
+    to bottom left,
+    rgb(252, 255, 69),
+    rgb(124, 124, 211) 35%
+  );
+  color: aliceblue;
 }
 * {
   list-style: none;
