@@ -3,9 +3,7 @@ import axios from 'axios'
 
 export function App() {
   const [weatherInfo, setWeatherInfo] = useState({ weatherInfo: [] })
-  // const [main, setMain] = useState({ main: [] })
-  // const [clouds, setClouds] = useState({ clouds: [] })
-  // const [wind, setWind] = useState({ clouds: [] })
+
   const [zipCode, setZipCode] = useState(10000)
   const [city, setCity] = useState('City')
 
@@ -17,19 +15,6 @@ export function App() {
     setCity(event.target.value)
   }
 
-  // async function cityWeather() {
-  //   const response = await axios.get(
-  //     `api.openweathermap.org/data/2.5/weather?q=${city}&appid=038ca81c8c47ce0022176b5cdad909de&units=imperial`
-  //   )
-  //   if (response.status === 200) {
-  //     console.log(response.data)
-  //     setWeather(response.data.weather)
-  //     setWind(response.data.wind)
-  //     setClouds(response.data.clouds)
-  //     setMain(response.data.main)
-  //   }
-  // }
-
   async function zipCodeWeather() {
     const weatherData = await axios
       .get(
@@ -38,15 +23,27 @@ export function App() {
       .then((resp) => setWeatherInfo(resp.data))
   }
 
+  async function cityWeather() {
+    const weatherData = await axios
+      .get(
+        `api.openweathermap.org/data/2.5/weather?q=${city}&appid=038ca81c8c47ce0022176b5cdad909de&units=imperial`
+      )
+      .then((resp) => setWeatherInfo(resp.data))
+  }
+
   useEffect(() => {
     zipCodeWeather()
+  }, [])
+
+  useEffect(() => {
+    cityWeather()
   }, [])
 
   //`api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=038ca81c8c47ce0022176b5cdad909de&units=imperial`
 
   return (
     <main>
-      <h1>Lamest Conversation Topic</h1>
+      <h1>Weather</h1>
       <div>
         <ol>
           <ul>
